@@ -52,6 +52,10 @@ function game() {
                         player.health -= badGuyPower;
                         console.log("Befor you can run away " + badGuy
                             + ' attacks you with ' + badGuyPower);
+                        if(player.health <= 0) {
+                            console.log(player.name + ' got killed by ' + badGuy
+                            + '. Better luck next time.');
+                        }
                     } else {
                         console.log("Luckily! you got away alive this time...");
                     }
