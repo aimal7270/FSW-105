@@ -27,13 +27,14 @@ function game() {
     let badGuyHealth = 40;
     let badGuyPower = 0;
     
-    const index = readlineSync.keyInSelect(options, "What are you going to do now? haha!...");
+    const userAction = readlineSync.keyIn("'w' to walk\n'e' to exit\n'p' to print\n"
+    + "Haha! What are you going to do now? ", {limit: '$<e,p,w>'});
         
-    if (options[index] == 'Exit') {
+    if (userAction == 'e') {
         return player.health = 0;
-    } else if (options[index] == 'Print') {
+    } else if (userAction == 'p') {
         console.log(player.name + ': \n' + player.health + '\nTreasure: ' + pickUp);
-    } else if (options[index] == 'Walk') {
+    } else if (userAction == 'w') {
         let key = Math.random();
         if (key <= .3) {
             console.log("Walking...");
@@ -41,7 +42,8 @@ function game() {
             console.log(badGuy + " showed up. ");
             while (badGuyHealth > 0 && player.health > 0) {
                 const userChoice = readlineSync
-                    .question("What are you going to do now? Enter 'r' to run or 'a' to attack: ");
+                    .keyIn("What are you going to do now? Enter 'r' to run or 'a' to attack: ",
+                    {limit: '$<r,a>'});
 
                 if (userChoice == 'r') { // Try to run. 
                     const run = Math.random();
